@@ -6,7 +6,7 @@ const app = express();
 app.use(express.json());
 
 
-
+// add user
 app.post('/signup', async (req, res) => {
     const user = new User(req.body);
     try {
@@ -14,7 +14,7 @@ app.post('/signup', async (req, res) => {
         res.send('user added succesfully');
     }
     catch (err) {
-        res.status(400).send('user not added', err.message);
+        res.status(400).send(err.message);
     }
 });
 
@@ -58,15 +58,37 @@ app.delete('/user', async (req, res) => {
 });
 
 // update user by id
-app.patch('/user', async (req, res) => {
-    const userId = req.body.userId;
+app.patch('/user/:userId', async (req, res) => {
+    const userId = req.params?.userId;
     const updateData = req.body;
     try {
-        await User.findByIdAndUpdate({ _id: userId }, updateData);
+        const UPDATE_ALLOWED = ["password", "gender", "photoUrl", "about", "skills"];
+        const isUpdateAllowed = Object.keys(updateData).every((key) => UPDATE_ALLOWED.includes(key));
+        if (!isUpdateAllowed) {
+            throw new Error('update not allowed');
+        }
+        if (updateData?.skills.length > 10) {
+            throw new Error('skills cannot be more than 10');
+        }
+        await User.findByIdAndUpdate({ _id: userId }, updateData, { runValidators: true });
+        res.send('updated data successfully');
+
+    }
+    catch (err) {
+        res.status(401).send('something went wrong !' + err.message);
+    }
+});
+
+// update user by emailId
+app.patch('/users', async (req, res) => {
+    const emailId = req.body.emailId;
+    const updateData = req.body;
+    try {
+        await User.findOneAndUpdate({ emailId: emailId }, updateData);
         res.send('updated data successfully');
     }
     catch (err) {
-        res.status(401).send('something went wrong !');
+        res.status(401).send('something went wrong !' + err.message);
     }
 });
 
