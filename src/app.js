@@ -1,41 +1,34 @@
 const express = require('express');
-const { adminAuth } = require('./middlewares/auth');
-
+const connectDB = require('./config/database');
+const User = require('./models/user');
 const app = express();
 
-app.use('/', (err, req, res, next) => {
-    if (err) {
-        res.status(500).send('Something went wrong, contact support team !!!');
-    }
-})
 
 
-app.get('/user', (req, res) => {
+app.post('/signup', async (req, res) => {
+    const user = new User({
+        firstName: 'John',
+        lastName: 'Wick',
+        age: '35',
+        emailId: 'john@wick.com',
+    });
+
     try {
-        throw new Error('error');
-        res.send('all users'); // route handling
+        await user.save();
+        res.send('user added succesfully');
     }
     catch (err) {
-        res.status(500).send('Something went wrong !!!');
+        res.status(400).send('user not added', err.message);
     }
 
 })
 
-
-
-// app.use('/admin', adminAuth)
-
-// app.get('/user', (req, res) => {
-//     res.send('all users'); // route handling
-// })
-
-// app.get('/admin/getData', (req, res) => {
-//     res.send('all get data');
-// })
-// app.get('/admin/postData', (req, res) => {
-//     res.send('all post data')
-// })
-
-app.listen(3000, () => {
-    console.log('listening to port 3000');
-});
+connectDB()
+    .then(() => {
+        console.log('connection established');
+        app.listen(3000, () => {
+            console.log('listening to port 3000');
+        });
+    }).catch((err) => {
+        console.error('connection failed !!');
+    });
