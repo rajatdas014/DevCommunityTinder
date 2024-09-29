@@ -6,12 +6,14 @@ const connectionRequestSchema = new mongoose.Schema({
     fromUserId:
     {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "User", //reference to the user collection
         required: true,
     },
 
     toUserId:
     {
         type: mongoose.Schema.Types.ObjectId,
+        ref: "User", //reference to the user collection
         required: true,
     },
 
@@ -36,7 +38,6 @@ connectionRequestSchema.pre('save', function (next) {
     if (conectionRequest.fromUserId.equals(conectionRequest.toUserId)) {
         throw new Error('Cannot send connection request to yourself !');
     }
-
     next();
 })
 
