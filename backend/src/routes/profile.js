@@ -1,9 +1,9 @@
-const express = require('express');
-const profileRouter = express.Router();
-const bcrypt = require('bcrypt');
+import { Router } from 'express';
+const profileRouter = Router();
+import { hash } from 'bcrypt';
 
-const { userAuth } = require('../middlewares/auth');
-const { validateEditProfileData } = require('../utils/validation')
+import userAuth from '../middlewares/auth.js';
+import { validateEditProfileData } from '../utils/validation.js';
 
 
 profileRouter.get('/profile/view', userAuth, async (req, res) => {
@@ -40,7 +40,7 @@ profileRouter.patch('/profile/password', userAuth, async (req, res) => {
         if (!getPasswordInput) {
             throw new Error('worng input, please check once ');
         }
-        const passwordEncypt = await bcrypt.hash(getPasswordInput, 10);
+        const passwordEncypt = await hash(getPasswordInput, 10);
         loggedUser.password = passwordEncypt;
 
         await loggedUser.save();
@@ -54,4 +54,4 @@ profileRouter.patch('/profile/password', userAuth, async (req, res) => {
 
 });
 
-module.exports = profileRouter;
+export default profileRouter;

@@ -1,16 +1,16 @@
-const express = require('express');
-const userRouter = express.Router();
-const { userAuth } = require('../middlewares/auth');
-const ConnectionRequest = require('../models/connectionRequest');
-const User = require('../models/user')
-
+import { Router } from 'express';
+const userRouter = Router();
+import userAuth from '../middlewares/auth.js';
+import ConnectionRequestModel from '../models/connectionRequest.js';
+import User from '../models/user.js';
 const USER_SHARED_DATA = ["firstName", "lastName", "photoUrl", "age", "about", "skills"];
+
 
 
 userRouter.get('/user/requests/recieved', userAuth, async (req, res) => {
     try {
         const LoggedInUser = req.user;
-        const connectionRequests = await ConnectionRequest.find({
+        const connectionRequests = await ConnectionRequestModel.find({
             toUserId: LoggedInUser._id,
             status: 'interested',
         }).populate("fromUserId", USER_SHARED_DATA);
@@ -29,7 +29,7 @@ userRouter.get('/user/connections', userAuth, async (req, res) => {
     try {
         const loggedInUser = req.user;
 
-        const connectionRequests = await ConnectionRequest.find({
+        const connectionRequests = await ConnectionRequestModel.find({
             $or: [
                 { fromUserId: loggedInUser._id, status: 'accepted' },
                 { toUserId: loggedInUser._id, status: 'accepted' }
@@ -68,7 +68,7 @@ userRouter.get('/feed', userAuth, async (req, res) => {
         limit = limit > 50 ? 50 : limit;
         const skip = (page - 1) * limit;
 
-        const connectionRequests = await ConnectionRequest.find({
+        const connectionRequests = await ConnectionRequestModel.find({
             $or: [
                 { fromUserId: loggedInUser._id },
                 { toUserId: loggedInUser._id }
@@ -81,7 +81,7 @@ userRouter.get('/feed', userAuth, async (req, res) => {
         connectionRequests.forEach((val) => {
             hideConnections.add(val.toUserId._id.toString());
             hideConnections.add(val.fromUserId._id.toString());
-        })
+        });
 
         const users = await User.find({
             $and: [
@@ -97,4 +97,4 @@ userRouter.get('/feed', userAuth, async (req, res) => {
     }
 })
 
-module.exports = userRouter;
+export default userRouter;

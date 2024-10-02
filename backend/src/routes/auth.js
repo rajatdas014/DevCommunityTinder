@@ -1,9 +1,9 @@
-const express = require('express');
-const authRouter = express.Router();
+import { Router } from 'express';
+const authRouter = Router();
 
-const { validateSignUpData } = require('../utils/validation');
-const bcrypt = require('bcrypt');
-const User = require('../models/user');
+import { validateSignUpData } from '../utils/validation.js';
+import { hash } from 'bcrypt';
+import User from '../models/user.js';
 
 
 authRouter.post('/signup', async (req, res) => {
@@ -13,7 +13,7 @@ authRouter.post('/signup', async (req, res) => {
         validateSignUpData(req);
 
         // encrypt password
-        const passwordEncypt = await bcrypt.hash(password, 10);
+        const passwordEncypt = await hash(password, 10);
 
         const user = new User({ firstName, lastName, emailId, password: passwordEncypt });
         await user.save();
@@ -66,4 +66,4 @@ authRouter.post('/logout', async (req, res) => {
 
 
 
-module.exports = authRouter;
+export default authRouter;

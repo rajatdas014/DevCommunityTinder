@@ -1,10 +1,11 @@
-const mongoose = require('mongoose');
+import { connect } from 'mongoose';
 
+console.log(connect);
 
 const connectDB = async () => {
-    await mongoose.connect(
+    await connect(
         'mongodb+srv://namastedev:4D6ZO8RQuKJw63yb@namastenode.tcetj.mongodb.net/devTinder'
     );
 }
 
-module.exports = connectDB
+export default connectDB;

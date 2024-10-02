@@ -1,10 +1,10 @@
-const express = require('express');
-const requestRouter = express.Router();
+import { Router } from 'express';
+const requestRouter = Router();
 
 
-const { userAuth } = require('../middlewares/auth');
-const ConnectionRequest = require('../models/connectionRequest');
-const User = require('../models/user')
+import userAuth from '../middlewares/auth.js';
+import ConnectionRequestModel from '../models/connectionRequest.js';
+import User from '../models/user.js';
 
 requestRouter.post('/request/send/:status/:toUserId', userAuth, async (req, res) => {
     try {
@@ -22,7 +22,7 @@ requestRouter.post('/request/send/:status/:toUserId', userAuth, async (req, res)
             return res.status(400).json({ message: "user not found" })
         }
 
-        const duplicateRequest = await ConnectionRequest.findOne({
+        const duplicateRequest = await ConnectionRequestModel.findOne({
             $or: [
                 { fromUserId, toUserId },
                 { fromUserId: toUserId, toUserId: fromUserId }
@@ -35,7 +35,7 @@ requestRouter.post('/request/send/:status/:toUserId', userAuth, async (req, res)
             })
         }
 
-        const connectionRequest = new ConnectionRequest({
+        const connectionRequest = new ConnectionRequestModel({
             fromUserId, toUserId, status
         })
 
@@ -65,7 +65,7 @@ requestRouter.post('/request/review/:status/:requestId', userAuth, async (req, r
             return res.status(400).json({ message: "Status not allowed : " + status });
         }
 
-        const connectionRequest = await ConnectionRequest.findOne({
+        const connectionRequest = await ConnectionRequestModel.findOne({
             _id: requestId,
             toUserId: LoggedInUser._id,
             status: "interested",
@@ -87,4 +87,4 @@ requestRouter.post('/request/review/:status/:requestId', userAuth, async (req, r
 
 
 
-module.exports = requestRouter;
+export default requestRouter;

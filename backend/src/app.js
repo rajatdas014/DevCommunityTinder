@@ -1,18 +1,16 @@
-const express = require('express');
-const connectDB = require('./config/database');
-const User = require('./models/user');
+import express, { json } from 'express';
+import connectDB from './config/database.js';
 const app = express();
 
-const jwt = require('jsonwebtoken');
-const cookieParser = require('cookie-parser');
+import cookieParser from 'cookie-parser';
 
-app.use(express.json());
+app.use(json());
 app.use(cookieParser());
 
-const authRouter = require('./routes/auth');
-const profileRouter = require('./routes/profile');
-const requestRouter = require('./routes/request');
-const userRouter = require('./routes/user')
+import authRouter from './routes/auth.js';
+import profileRouter from './routes/profile.js';
+import requestRouter from './routes/request.js';
+import userRouter from './routes/user.js';
 
 
 app.use('/', authRouter);
@@ -28,5 +26,5 @@ connectDB()
             console.log('listening to port 3000');
         });
     }).catch((err) => {
-        console.error('connection failed !!');
+        console.error('connection failed !!' + err);
     });

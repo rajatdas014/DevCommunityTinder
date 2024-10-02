@@ -1,5 +1,6 @@
-const jwt = require('jsonwebtoken');
-const User = require('../models/user');
+import jwt from 'jsonwebtoken';
+const { verify } = jwt;
+import User from '../models/user.js';
 
 
 // Handling middleware
@@ -11,7 +12,7 @@ const userAuth = async (req, res, next) => {
             throw new Error('Session timeout ! Please login again 😊');
         }
 
-        const decodedReq = await jwt.verify(token, "DEV@Tinder790");
+        const decodedReq = await verify(token, "DEV@Tinder790");
         const { _id } = decodedReq;
 
         const user = await User.findById(_id);
@@ -29,5 +30,5 @@ const userAuth = async (req, res, next) => {
     }
 }
 
-module.exports = { userAuth };
+export default userAuth;
 

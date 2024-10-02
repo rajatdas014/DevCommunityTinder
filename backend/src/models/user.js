@@ -1,10 +1,12 @@
-const mongoose = require('mongoose');
-const validitor = require('validator')
-const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+import { Schema, model } from 'mongoose';
+import pkg from 'validator';
+const { isEmail, isURL } = pkg;
+import jwt from 'jsonwebtoken';
+const { sign } = jwt;
+import { compare } from 'bcrypt';
 
 
-const userSchema = new mongoose.Schema({
+const userSchema = new Schema({
     firstName:
     {
         type: String,
@@ -26,7 +28,7 @@ const userSchema = new mongoose.Schema({
         unique: true,
         trim: true,
         validate(value) {
-            if (!validitor.isEmail(value)) {
+            if (!isEmail(value)) {
                 throw new Error('Invalid email id ' + value);
             }
         }
@@ -55,7 +57,7 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "https://www.dgvaishnavcollege.edu.in/dgvaishnav-c/uploads/2021/01/dummy-profile-pic.jpg",
         validate(value) {
-            if (!validitor.isURL(value)) {
+            if (!isURL(value)) {
                 throw new Error('Invalid image url ' + value);
             }
         }
@@ -73,16 +75,16 @@ const userSchema = new mongoose.Schema({
 
 userSchema.methods.getJWT = async function () {
     const user = this;
-    var token = await jwt.sign({ _id: user._id }, 'DEV@Tinder790', { expiresIn: '1d' });
+    var token = await sign({ _id: user._id }, 'DEV@Tinder790', { expiresIn: '1d' });
 
     return token;
 }
 userSchema.methods.validatePassword = async function (passwordByUser) {
     const user = this;
     const passwordHash = user.password;
-    const isPasswordValid = await bcrypt.compare(passwordByUser, passwordHash);
+    const isPasswordValid = await compare(passwordByUser, passwordHash);
 
     return isPasswordValid;
 }
 
-module.exports = mongoose.model('User', userSchema);
+export default model('User', userSchema);
