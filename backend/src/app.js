@@ -1,8 +1,15 @@
 import express, { json } from 'express';
 import connectDB from './config/database.js';
+import cors from 'cors';
 const app = express();
 
 import cookieParser from 'cookie-parser';
+
+
+app.use(cors({
+    origin: 'http://localhost:5173',
+    credentials: true,
+}));
 
 app.use(json());
 app.use(cookieParser());
