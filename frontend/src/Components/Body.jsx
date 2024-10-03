@@ -20,7 +20,6 @@ const Body = () => {
                 withCredentials: true,
             });
             dispatch(addUser(res.data));
-            console.log()
 
         }
         catch (err) {
