@@ -9,7 +9,7 @@ const userAuth = async (req, res, next) => {
         const cookies = req.cookies;
         const { token } = cookies;
         if (!token) {
-            throw new Error('Session timeout ! Please login again 😊');
+            return res.status(401).send('Session timeout ! Please login again 😊');
         }
 
         const decodedReq = await verify(token, "DEV@Tinder790");
