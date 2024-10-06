@@ -26,7 +26,7 @@ const NavBar = () => {
     return (
         <div className="navbar bg-accent-content">
             <div className="flex-1">
-                <Link to='/' className="btn btn-ghost text-xl">🧑‍💻DevTinderCommunity</Link>
+                <Link to='/' className="btn btn-ghost text-xl text-white">🧑‍💻DevTinderCommunity</Link>
             </div>
             {user && (<div className="flex-none gap-2 mx-5">
                 <div className="form-control">

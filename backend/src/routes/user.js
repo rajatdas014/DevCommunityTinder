@@ -3,7 +3,7 @@ const userRouter = Router();
 import userAuth from '../middlewares/auth.js';
 import ConnectionRequestModel from '../models/connectionRequest.js';
 import User from '../models/user.js';
-const USER_SHARED_DATA = ["firstName", "lastName", "photoUrl", "age", "about", "skills"];
+const USER_SHARED_DATA = ["firstName", "lastName", "photoUrl", "age", "gender", "about", "skills"];
 
 
 
