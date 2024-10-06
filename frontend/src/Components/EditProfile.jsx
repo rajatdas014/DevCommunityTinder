@@ -1,3 +1,5 @@
+
+import PropTypes from 'prop-types'
 import { useState } from "react"
 import { useDispatch } from "react-redux";
 import UserCard from "./userCard";
@@ -141,17 +143,17 @@ const EditProfile = ({ user }) => {
     )
 }
 
-// EditProfile.propTypes = {
-//     user: PropTypes.shape({
-//         firstName: PropTypes.string.isRequired,
-//         lastName: PropTypes.string.isRequired,
-//         photoUrl: PropTypes.string.isRequired,
-//         age: PropTypes.number.isRequired,
-//         gender: PropTypes.string.isRequired,
-//         about: PropTypes.string.isRequired,
-//         skills: PropTypes.array.isRequired,
-//     }).isRequired,
-// };
+EditProfile.propTypes = {
+    user: PropTypes.shape({
+        firstName: PropTypes.string.isRequired,
+        lastName: PropTypes.string.isRequired,
+        photoUrl: PropTypes.string.isRequired,
+        age: PropTypes.number.isRequired,
+        gender: PropTypes.string.isRequired,
+        about: PropTypes.string.isRequired,
+        skills: PropTypes.array.isRequired,
+    }).isRequired,
+};
 
 
 
