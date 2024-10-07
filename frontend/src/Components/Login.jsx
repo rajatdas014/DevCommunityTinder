@@ -7,8 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 
 const Login = () => {
-    const [emailId, setEmailId] = useState("harman@email.com");
-    const [password, setPassword] = useState("Harman@123");
+    const [emailId, setEmailId] = useState("parinit@email.com");
+    const [password, setPassword] = useState("Pariniti@123");
     const [error, setError] = useState("");
     const dispatch = useDispatch();
     const navigate = useNavigate();
@@ -34,7 +34,7 @@ const Login = () => {
 
     return (
         <>
-            <div className="card bg-primary w-96 shadow-xl mx-auto  my-4">
+            <div className="card bg-secondary w-96 shadow-xl mx-auto  my-4">
                 <div className="card-body">
                     <h2 className="card-title m-auto">Login</h2>
                     <div className="card-actions justify-end flex flex-col">

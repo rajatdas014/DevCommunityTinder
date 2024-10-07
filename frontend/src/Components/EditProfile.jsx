@@ -21,7 +21,6 @@ const EditProfile = ({ user }) => {
     const dispatch = useDispatch();
 
     const saveDataHandler = async () => {
-        console.log('print before api call')
         try {
             const res = await axios.patch(BASE_URL + '/profile/edit',
                 {
