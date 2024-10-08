@@ -1,7 +1,7 @@
 import axios from "axios"
 import { BASE_URL } from "../utils/constants"
 import { useDispatch, useSelector } from "react-redux"
-import { addRequest } from '../utils/requestSlice'
+import { addRequest, removeRequest } from '../utils/requestSlice'
 import { useEffect } from "react"
 
 
@@ -14,13 +14,30 @@ const Requests = () => {
         const res = await axios.get(BASE_URL + '/user/requests/recieved', { withCredentials: true });
         dispatch(addRequest(res.data.data));
     }
+
+    const responseHandler = async (status, _id) => {
+        try {
+            await axios.post(BASE_URL + '/request/review/' + status + '/' + _id,
+                {},
+                { withCredentials: true, });
+            dispatch(removeRequest(_id));
+        }
+        catch (err) {
+            console.log(err.message);
+        }
+    }
+
     useEffect(() => {
         fetchRequestUsers();
     }, [])
 
+    if (!storeData) return;
+
+    if (storeData.length === 0) return <h1 className="flex justify-center my-4">No Request Found</h1>
+
     return (storeData &&
         <>
-            <h1 className="text-center text-xl my-2">Connection Requests</h1>
+            <h1 className="text-center text-xl my-2">Got connection requests</h1>
             {storeData.map((item, index) => {
                 const { firstName, lastName, age, gender, photoUrl } = item.fromUserId;
                 return (
@@ -33,8 +50,10 @@ const Requests = () => {
                                 {age && <p>{age}</p>}
                             </div>
                             <div className="card-actions justify-end mt-4">
-                                <button className="btn btn-primary">Reject</button>
-                                <button className="btn btn-secondary">Accept</button>
+                                <button className="btn btn-primary"
+                                    onClick={() => responseHandler('rejected', item._id)}>Reject</button>
+                                <button className="btn btn-secondary"
+                                    onClick={() => responseHandler('accepted', item._id)}>Accept</button>
                             </div>
                         </div>
                     </div>
