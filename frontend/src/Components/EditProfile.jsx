@@ -2,7 +2,7 @@
 import PropTypes from 'prop-types'
 import { useState } from "react"
 import { useDispatch } from "react-redux";
-import UserCard from "./userCard";
+import UserCard from './UserCard';
 import { BASE_URL } from "../utils/constants";
 import { addUser } from '../utils/userSlice';
 import axios from 'axios';
@@ -131,7 +131,7 @@ const EditProfile = ({ user }) => {
                         </div>
                     </div>
                 </div>
-                <UserCard user={{ firstName, lastName, photoUrl, about, gender, age, skills }} />
+                <UserCard user={{ firstName, lastName, photoUrl, about, gender, age, skills }} showActions={false} />
             </div>
             {showToast && <div className="toast toast-top toast-center">
                 <div className="alert alert-success">

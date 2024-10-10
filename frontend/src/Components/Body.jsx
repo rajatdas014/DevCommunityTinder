@@ -36,7 +36,7 @@ const Body = () => {
 
 
     return (
-        <div>
+        <div className="h-[100vh]">
             <NavBar />
             <Outlet />
             <Footer />
