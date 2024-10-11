@@ -12,17 +12,17 @@ const EditProfile = ({ user }) => {
     const [firstName, setFirstName] = useState(user.firstName);
     const [lastName, setLastName] = useState(user.lastName);
     const [photoUrl, setPhotoUrl] = useState(user.photoUrl);
-    const [age, setAge] = useState(user.age);
-    const [gender, setGender] = useState(user.gender);
-    const [about, setAbout] = useState(user.about);
-    const [skills, setSkills] = useState(user.skills);
+    const [age, setAge] = useState(user.age || "");
+    const [gender, setGender] = useState(user.gender || "");
+    const [about, setAbout] = useState(user.about || "");
+    const [skills, setSkills] = useState(user.skills || "");
     const [error, setError] = useState();
     const [showToast, setShowToast] = useState(false);
     const dispatch = useDispatch();
 
     const saveDataHandler = async () => {
         try {
-            const res = await axios.patch(BASE_URL + '/profile/edit',
+            const res = await axios.post(BASE_URL + '/profile/edit',
                 {
                     firstName,
                     lastName,
@@ -34,7 +34,6 @@ const EditProfile = ({ user }) => {
                 },
                 { withCredentials: true }
             )
-            console.log(res);
             dispatch(addUser(res?.data?.data));
             setShowToast(true);
             setTimeout(() => {
