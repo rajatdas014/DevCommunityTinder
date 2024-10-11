@@ -16,8 +16,17 @@ authRouter.post('/signup', async (req, res) => {
         const passwordEncypt = await hash(password, 10);
 
         const user = new User({ firstName, lastName, emailId, password: passwordEncypt });
-        await user.save();
-        res.send('user added succesfully');
+        const newuser = await user.save();
+
+        const token = await newuser.getJWT();
+
+        // add token to cookie and send the response back to the user
+        res.cookie("token", token, { expires: new Date(Date.now() + 900000) });
+
+        res.json({
+            message: `${user.firstName}`,
+            data: newuser,
+        });
     }
     catch (err) {
         res.status(400).send('ERROR:' + err.message);
@@ -38,7 +47,7 @@ authRouter.post('/login', async (req, res) => {
         if (isPasswordValid) {
 
             // create jwt token
-            var token = await user.getJWT();
+            const token = await user.getJWT();
 
             // add token to cookie and send the response back to the user
             res.cookie("token", token, { expires: new Date(Date.now() + 900000) });

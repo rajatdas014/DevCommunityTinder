@@ -146,11 +146,11 @@ EditProfile.propTypes = {
     user: PropTypes.shape({
         firstName: PropTypes.string.isRequired,
         lastName: PropTypes.string.isRequired,
-        photoUrl: PropTypes.string.isRequired,
-        age: PropTypes.number.isRequired,
-        gender: PropTypes.string.isRequired,
-        about: PropTypes.string.isRequired,
-        skills: PropTypes.array.isRequired,
+        photoUrl: PropTypes.string,
+        age: PropTypes.number,
+        gender: PropTypes.string,
+        about: PropTypes.string,
+        skills: PropTypes.array,
     }).isRequired,
 };
 
