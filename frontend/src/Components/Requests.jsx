@@ -41,22 +41,24 @@ const Requests = () => {
             {storeData.map((item, index) => {
                 const { firstName, lastName, age, gender, photoUrl } = item.fromUserId;
                 return (
-                    < div key={index} className="card bg-neutral text-neutral-content w-96 m-2" >
-                        <div className="card-body items-center text-center">
-                            <img src={photoUrl} alt="profile-photo" />
-                            <h2 className="card-title">{firstName + " " + lastName}</h2>
-                            <div className="flex">
-                                {gender && <p className="capitalize mr-2">{gender}</p>}
-                                {age && <p>{age}</p>}
-                            </div>
-                            <div className="card-actions justify-end mt-4">
-                                <button className="btn btn-primary"
-                                    onClick={() => responseHandler('rejected', item._id)}>Reject</button>
-                                <button className="btn btn-secondary"
-                                    onClick={() => responseHandler('accepted', item._id)}>Accept</button>
+                    <>
+                        <div key={index} className="card bg-neutral text-neutral-content w-96 m-2" >
+                            <div className="card-body items-center text-center">
+                                <img src={photoUrl} alt="profile-photo" />
+                                <h2 className="card-title">{firstName + " " + lastName}</h2>
+                                <div className="flex">
+                                    {gender && <p className="capitalize mr-2">{gender}</p>}
+                                    {age && <p>{age}</p>}
+                                </div>
+                                <div className="card-actions justify-end mt-4">
+                                    <button className="btn btn-primary"
+                                        onClick={() => responseHandler('rejected', item._id)}>Reject</button>
+                                    <button className="btn btn-secondary"
+                                        onClick={() => responseHandler('accepted', item._id)}>Accept</button>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    </>
                 )
             })}
         </>

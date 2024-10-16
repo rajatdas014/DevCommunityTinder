@@ -1,8 +1,8 @@
 
 const Footer = () => {
     return (
-        <div>
-            <footer className="footer bg-accent-content text-neutral-content p-2 fixed bottom-0 items-center">
+        <>
+            <footer className="footer bg-accent-content text-neutral-content p-2 absolute top-[100%]">
                 <aside className="flex items-center">
                     <svg
                         width="25"
@@ -59,7 +59,8 @@ const Footer = () => {
                         </a>
                     </div>
                 </nav>
-            </footer></div>
+            </footer>
+            </>
     )
 }
 

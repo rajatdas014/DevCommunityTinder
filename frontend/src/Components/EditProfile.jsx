@@ -49,77 +49,77 @@ const EditProfile = ({ user }) => {
 
     return (
         <>
-            <div className="flex justify-center">
+            <div className="flex justify-center h-[90vh]">
                 <div className="card bg-primary w-96 shadow-xl my-4 mr-4">
                     <div className="card-body">
                         <h2 className="card-title m-auto">Profile Details</h2>
-                        <div className="card-actions justify-end flex flex-col">
+                        <div className="card-actions justify-end flex flex-col gap-0.5">
                             <label className="form-control w-full max-w-xs">
-                                <div className="label">
+                                <div className="label p-1">
                                     <span className="label-text">First Name :</span>
                                 </div>
                                 <input type="text"
                                     value={firstName}
-                                    className="input input-bordered w-full max-w-xs"
+                                    className="input input-bordered w-full h-[2.2rem]"
                                     onChange={(e) => setFirstName(e.target.value)} />
                             </label>
-                            <label className="form-control w-full max-w-xs mb-4">
-                                <div className="label">
+                            <label className="form-control w-full max-w-xs">
+                                <div className="label p-1">
                                     <span className="label-text">Last Name :</span>
                                 </div>
                                 <input type="text"
                                     value={lastName}
-                                    className="input input-bordered w-full max-w-xs"
+                                    className="input input-bordered w-full  h-[2.2rem]"
                                     onChange={(e) => setLastName(e.target.value)}
                                 />
                             </label>
-                            <label className="form-control w-full max-w-xs mb-4">
-                                <div className="label">
+                            <label className="form-control w-full max-w-xs">
+                                <div className="label p-1">
                                     <span className="label-text">Photo :</span>
                                 </div>
                                 <input type="text"
                                     value={photoUrl}
-                                    className="input input-bordered w-full max-w-xs"
+                                    className="input input-bordered w-full  h-[2.2rem]"
                                     onChange={(e) => setPhotoUrl(e.target.value)}
                                 />
                             </label>
-                            <label className="form-control w-full max-w-xs mb-4">
-                                <div className="label">
+                            <label className="form-control w-full max-w-xs">
+                                <div className="label p-1">
                                     <span className="label-text">Age :</span>
                                 </div>
                                 <input type="text"
                                     value={age}
-                                    className="input input-bordered w-full max-w-xs"
+                                    className="input input-bordered w-full  h-[2.2rem]"
                                     onChange={(e) => setAge(e.target.value)}
                                 />
                             </label>
-                            <label className="form-control w-full max-w-xs mb-4">
-                                <div className="label">
+                            <label className="form-control w-full max-w-xs">
+                                <div className="label p-1">
                                     <span className="label-text">Gender :</span>
                                 </div>
                                 <input type="text"
                                     value={gender}
-                                    className="input input-bordered w-full max-w-xs"
+                                    className="input input-bordered w-full  h-[2.2rem]"
                                     onChange={(e) => setGender(e.target.value)}
                                 />
                             </label>
-                            <label className="form-control w-full max-w-xs mb-4">
-                                <div className="label">
+                            <label className="form-control w-full max-w-xs">
+                                <div className="label p-1">
                                     <span className="label-text">About :</span>
                                 </div>
                                 <input type="text"
                                     value={about}
-                                    className="input input-bordered w-full max-w-xs"
+                                    className="input input-bordered w-full  h-[2.2rem]"
                                     onChange={(e) => setAbout(e.target.value)}
                                 />
                             </label>
                             <label className="form-control w-full max-w-xs mb-4">
-                                <div className="label">
+                                <div className="label p-1 ">
                                     <span className="label-text">Skills :</span>
                                 </div>
                                 <input type="text"
                                     value={skills}
-                                    className="input input-bordered w-full max-w-xs"
+                                    className="input input-bordered w-full  h-[2.2rem]"
                                     onChange={(e) => setSkills(e.target.value)}
                                 />
                             </label>

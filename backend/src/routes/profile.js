@@ -1,7 +1,7 @@
 import { Router } from 'express';
 const profileRouter = Router();
 import { hash } from 'bcrypt';
-
+import { passwordValidator } from '../utils/passwordValidator.js';
 import userAuth from '../middlewares/auth.js';
 import { validateEditProfileData } from '../utils/validation.js';
 
@@ -37,12 +37,15 @@ profileRouter.post('/profile/edit', userAuth, async (req, res) => {
     }
 })
 
-profileRouter.patch('/profile/password', userAuth, async (req, res) => {
+profileRouter.post('/profile/password', userAuth, async (req, res) => {
     try {
+
         const loggedUser = req.user;
         const getPasswordInput = req.body.password;
+        passwordValidator(req);
+
         if (!getPasswordInput) {
-            throw new Error('worng input, please check once ');
+            throw new Error('wrong input, please check once ');
         }
         const passwordEncypt = await hash(getPasswordInput, 10);
         loggedUser.password = passwordEncypt;

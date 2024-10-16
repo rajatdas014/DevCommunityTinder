@@ -51,7 +51,7 @@ const Login = () => {
 
     return (
         <>
-            <div className="card bg-secondary w-96 shadow-xl mx-auto  my-4">
+            <div className="card bg-secondary w-96 shadow-xl mx-auto my-4">
                 <div className="card-body">
                     <h2 className="card-title m-auto">{isLogin ? 'Login' : 'Sign Up'}</h2>
                     <div className="card-actions justify-end flex flex-col">
@@ -93,7 +93,7 @@ const Login = () => {
                             <div className="label">
                                 <span className="label-text">Password:</span>
                             </div>
-                            <input type="text"
+                            <input type="password"
                                 value={password}
                                 placeholder="password"
                                 className="input input-bordered w-full max-w-xs"

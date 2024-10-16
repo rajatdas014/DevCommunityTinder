@@ -22,7 +22,7 @@ const UserCard = ({ user, showActions }) => {
 
 
     return (
-        <div className="card bg-base-400 w-96 shadow-xl mt-2">
+        <div className="card bg-base-400 w-96 shadow-xl mt-2 h-[87vh] overflow-hidden">
             <figure className="w-[17vw] m-auto h-[17vw]">
                 <img
                     src={photoUrl}

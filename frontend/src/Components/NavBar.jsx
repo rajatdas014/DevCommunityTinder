@@ -51,6 +51,7 @@ const NavBar = () => {
                         </li>
                         <li><Link to='/connections'>Connections</Link></li>
                         <li><Link to='/requests'>Requests</Link></li>
+                        <li><Link to='/updatepassword'>Update Password</Link></li>
                         <li onClick={logoutHandler}><a>Logout</a></li>
                     </ul>
                 </div>
