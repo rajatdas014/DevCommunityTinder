@@ -2,7 +2,7 @@ import { Outlet, useNavigate } from "react-router-dom"
 import NavBar from "./NavBar"
 import Footer from "./Footer"
 import axios from "axios"
-import { BASE_URL } from "../utils/constants"
+import { BASE_URL } from "../utils/constants.js"
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { addUser } from "../utils/userSlice"
@@ -40,6 +40,7 @@ const Body = () => {
             <NavBar />
             <Outlet />
             <Footer />
+            {/* <Practice /> */}
         </div>
     )
 }

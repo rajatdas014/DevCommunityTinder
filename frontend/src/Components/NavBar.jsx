@@ -1,6 +1,6 @@
 import { useDispatch, useSelector } from "react-redux"
 import { Link, useNavigate } from "react-router-dom";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../utils/constants.js";
 import axios from 'axios'
 import { removeUser } from "../utils/userSlice";
 

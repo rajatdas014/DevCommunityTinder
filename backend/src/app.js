@@ -1,6 +1,7 @@
 import express, { json } from 'express';
 import connectDB from './config/database.js';
 import cors from 'cors';
+
 const app = express();
 
 import cookieParser from 'cookie-parser';
@@ -64,6 +65,29 @@ app.use('/', authRouter);
 app.use('/', profileRouter);
 app.use('/', requestRouter);
 app.use('/', userRouter);
+
+// import EventEmitter from 'events'
+// const event = new EventEmitter();
+// let count = 0;
+// event.on('countAPI',() => {
+//     console.log('api called', count++);
+// })
+
+// app.get('/update', (req, res) => {
+//     res.send('update called');
+//     event.emit('countAPI');
+// })
+
+
+// app.get('/profile', (req, res) => {
+//     res.send('profile called');
+//     event.emit('countAPI');
+// })
+
+// app.get('/api', (req, res) => {
+//     res.send('api called');
+//     event.emit('countAPI');
+// })
 
 
 connectDB()

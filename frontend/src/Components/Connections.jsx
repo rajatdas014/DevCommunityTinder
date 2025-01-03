@@ -1,4 +1,4 @@
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../utils/constants.js";
 import axios from 'axios';
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from '../utils/connectionSlice'

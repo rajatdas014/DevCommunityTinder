@@ -1,6 +1,6 @@
 import PropTypes from 'prop-types'
 import axios from "axios";
-import { BASE_URL } from "../utils/constants";
+import { BASE_URL } from "../utils/constants.js";
 import { useDispatch } from 'react-redux';
 import { removeFeed } from '../utils/feedSlice';
 
